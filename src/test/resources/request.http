@@ -1,0 +1,53 @@
+
+### Register by token
+
+POST https://localhost:9999/users.register
+Content-Type: application/json
+
+{
+  "login": "shaq",
+  "password": "secret"
+}
+
+> {%
+client.global.set('token', response.body.token);
+%}
+
+
+### Login by login password and gen token
+
+POST https://localhost:9999/users.login
+Content-Type: application/json
+
+{
+  "login": "vasya",
+  "password": "secret"
+}
+
+> {%
+client.global.set('token', response.body.token);
+%}
+
+### Login By Admin
+
+POST https://localhost:9999//users.login
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "secret"
+}
+
+> {%
+client.global.set('token', response.body.token);
+%}
+
+
+### search in RFC words
+GET https://localhost:9999/accounts.search?q=short
+Authorization: Bearer {{token}}
+
+
+### status search
+GET https://localhost:9999/accounts.status?id=7
+Authorization: Bearer {{token}}
